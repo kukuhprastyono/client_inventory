@@ -26,7 +26,6 @@
                         <label for="col-md-12">Upload Foto</label>
                         <div class="col-md-12">
                             <input type="file" name="file" id="file">
-
                             <div class="upload-area" id="uploadfile">
                                 <h2>Drag and drop<br>or<br>Click to select file</h2>
                             </div>
@@ -58,21 +57,27 @@
         }
         ?>
 
-
-        var dataForm = {};
+        var dataForm = new FormData();
         var allInput = $('.form-user-input');
 
         $.each(allInput, function(i, val) {
-            dataForm[val['name']] = val['value'];
+            dataForm.append(val['name'], val['value']);
         });
+
+        var file = $("#file")[0].files[0];
+        dataForm.append('file', file);
 
         $.ajax(link, {
             type: 'POST',
             data: dataForm,
+            contentType:false,
+            processData:false,
+            dataType:'json',
             success: function(data, status, xhr) {
-                var data_str = JSON.parse(data);
-                alert(data_str['pesan']);
+                // var data_str = JSON.parse(data);
+                alert(data['pesan']);
                 loadMenu('<?= base_url('barang') ?>');
+                console.log(data);
             },
             error: function(jqXHR, textStatus, errorMsg) {
                 alert('Error: ' + errorMsg);
@@ -119,16 +124,16 @@
     $("html").on("dragover", function(e) {
         e.preventDefault();
         e.stopPropagation();
-        $(".upload-area>h2").text("Drag here");
+        $(".upload-area > h2").text("Drag here");
     });
 
-    $("html").on('dragenter', function(e) {
+    $(".upload-area").on("dragenter", function(e) {
         e.stopPropagation();
         e.preventDefault();
-        $(".upload-area>h2").text("Drop");
+        $(".upload-area > h2").text("Drop");
     });
 
-    $("html").on('dragover', function(e) {
+    $(".upload-area").on("dragover", function(e) {
         e.stopPropagation();
         e.preventDefault();
         $(".upload-area>h2").text("Drop !!");
@@ -145,14 +150,13 @@
     });
 
     // upload area click
-    $(".upload-area").click(function(){
+    $(".upload-area").click(function() {
         $("#file").click();
     });
 
-    $("#file").change(function(){
+    $("#file").change(function() {
         var file = $("#file")[0].files[0];
         console.log(file);
-        $(".upload-area>h2").text("File yang dipilih : "+file.name)
+        $(".upload-area>h2").text("File yang dipilih :" + file.name)
     });
-
 </script>
