@@ -59,16 +59,13 @@
         ?>
 
 
-        var dataForm = new FormData();
+        var dataForm = {};
         var allInput = $('.form-user-input');
 
         $.each(allInput, function(i, val) {
-            dataForm.append(val['name'], val['value']);
+            dataForm[val['name']] = val['value'];
         });
 
-        var file = $('#file')[0].files[0];
-        dataForm.append('file', file);
-        
         $.ajax(link, {
             type: 'POST',
             data: dataForm,
