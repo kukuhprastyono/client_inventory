@@ -27,7 +27,15 @@
 
                 <h4>Dibawah ini adalah Data Barang</h4>
                 <table id="tabel_barang" class="table">
-
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Deskripsi</th>
+                            <th>Stok</th>
+                            <th>Foto</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
                 </table>
             </div>
         </div>
@@ -52,7 +60,7 @@
             }
         })
     }
-    loadKonten('http://localhost/backend_inventory/barang/list_barang');
+    // loadKonten('http://localhost/backend_inventory/barang/list_barang');
 
     function reload_event() {
         $('.linkEditBarang').on('click', function() {
@@ -64,7 +72,7 @@
             var hashClean = this.hash.replace('#', '');
             hapusData(hashClean);
         });
-        $('#tabel_barang').DataTable();
+        // $('#tabel_barang').DataTable();
     }
 
     function hapusData(id_barang) {
@@ -113,5 +121,19 @@
     $('#btn-cari').on('click', function() {
         cariData();
     })
-</script>
 
+    $(document).ready(function() {
+        $('#tabel_barang').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "lengthMenu": [
+                [1, 2, 3, -1],
+                [1, 2, 3, "ALL"]
+            ],
+            "ajax": "http://localhost/backend_inventory/barang/list_barang_ajax",
+            "fnDrawCallback": function() {
+                reload_event();
+            }
+        });
+    });
+</script>
