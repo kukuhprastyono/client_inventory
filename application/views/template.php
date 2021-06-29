@@ -15,6 +15,10 @@
     <link href="<?= base_url('assets/xtreme_admin_lite') ?>/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?= base_url('assets/xtreme_admin_lite') ?>/dist/css/style.min.css" rel="stylesheet">
+
+    <!-- datatables -->
+    <link rel="stylesheet" href="<?= base_url('assets/datatables/datatables.min.css')?>">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -22,39 +26,44 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
-    .upload-area{
-        width: 70%;
-        height: 350px;
-        border: 2px solid lightgray;
-        border-radius: 2px;
-        margin: 0 auto;
-        text-align: center;
-        overflow: auto;
-    }
-    .upload-area:hover{
-        cursor: pointer;
-    }
-    .upload-area h2{
-        text-align: center;
-        font-weight: normal;
-        font-family: sans-serif;
-        line-height: 50px;
-        color: darkslategrey;
-    }
-    #file{
-        display: none;
-    }
-    .thumbnail{
-        width: 80px;
-        height: 80px;
-        padding: 2px;
-        border: 2px solid lightgray;
-        border-radius: 3px;
-        float: left;
-    }
-    .size{
-        font-size: 12px;
-    }
+        .upload-area {
+            width: 70%;
+            height: 350px;
+            border: 2px solid lightgray;
+            border-radius: 2px;
+            margin: 0 auto;
+            text-align: center;
+            overflow: auto;
+        }
+
+        .upload-area:hover {
+            cursor: pointer;
+        }
+
+        .upload-area h2 {
+            text-align: center;
+            font-weight: normal;
+            font-family: sans-serif;
+            line-height: 50px;
+            color: darkslategrey;
+        }
+
+        #file {
+            display: none;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            padding: 2px;
+            border: 2px solid lightgray;
+            border-radius: 3px;
+            float: left;
+        }
+
+        .size {
+            font-size: 12px;
+        }
     </style>
 
 </head>
@@ -164,8 +173,8 @@
                                 <div class="user-pic"><img src="<?= base_url('assets/xtreme_admin_lite') ?>/assets/images/users/1.jpg" alt="users" class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
                                     <a href="javascript:void(0)" class="" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <h5 class="m-b-0 user-name font-medium">Steave Jobs <i class="fa fa-angle-down"></i></h5>
-                                        <span class="op-5 user-email">varun@gmail.com</span>
+                                        <h5 class="m-b-0 user-name font-medium"><?= $this->session->userdata('nama'); ?><i class="fa fa-angle-down"></i></h5>
+                                        <span class="op-5 user-email"><?= $this->session->userdata('email'); ?></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
@@ -174,7 +183,7 @@
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                        <a class="dropdown-item" href="<?= base_url('login/logout') ?>"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                     </div>
                                 </div>
                             </div>

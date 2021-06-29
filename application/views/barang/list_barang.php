@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <a href="#" onclick="loadMenu('<?= base_url('barang/form_create') ?>')" class="btn btn-primary">Tambahkan Data Barang</a>
-                <hr/>
+                <hr />
 
                 <div class="row">
                     <div class="col-md-3">
@@ -33,6 +33,9 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="<?= base_url('assets/datatables/datatables.min.js') ?>"></script>
+
 <script>
     function loadKonten(url) {
         $.ajax(url, {
@@ -61,6 +64,7 @@
             var hashClean = this.hash.replace('#', '');
             hapusData(hashClean);
         });
+        $('#tabel_barang').DataTable();
     }
 
     function hapusData(id_barang) {
@@ -97,7 +101,7 @@
             success: function(data, status, xhr) {
                 var objData = JSON.parse(data);
                 $('#tabel_barang').html(objData.konten);
-                
+
                 reload_event();
             },
             error: function(jqXHR, textStatus, errorMsg) {
@@ -106,7 +110,8 @@
         })
     }
 
-    $('#btn-cari').on('click', function(){
+    $('#btn-cari').on('click', function() {
         cariData();
     })
 </script>
+
